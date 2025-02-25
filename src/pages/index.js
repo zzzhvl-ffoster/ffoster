@@ -25,9 +25,9 @@ export default function Home() {
 
         {/* Галерея */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-          <img src="/illustrations/work1.jpg" className="rounded-lg shadow-md" />
-          <img src="/illustrations/work2.jpg" className="rounded-lg shadow-md" />
-          <img src="/illustrations/work3.jpg" className="rounded-lg shadow-md" />
+          <img src="/illustrations/work1.jpg" className="rounded-lg shadow-md transform transition duration-300 hover:scale-105"/>
+          <img src="/illustrations/work2.jpg" className="rounded-lg shadow-md transform transition duration-300 hover:scale-105"/>
+          <img src="/illustrations/work3.jpg" className="rounded-lg shadow-md transform transition duration-300 hover:scale-105"/>
         </div>
       </div>
     </div>
