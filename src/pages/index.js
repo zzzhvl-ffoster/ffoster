@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Layout from "../components/Layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,7 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   return (
+    <Layout>
     <div className="min-h-screen flex flex-col bg-gray-100 p-4">
       {/* Навигация */}
       <nav className="w-full bg-white shadow-md py-4 px-6">
@@ -36,5 +38,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }
