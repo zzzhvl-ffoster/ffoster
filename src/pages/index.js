@@ -1,7 +1,8 @@
-import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import Layout from "../components/Layout";
+import { useEffect, useState } from "react";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,22 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const querySnapshot = await getDocs(collection(db, "projects"));
+      const projectsArray = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setProjects(projectsArray);
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <Layout>
       <div className="min-h-screen flex flex-col bg-gray-100 p-4">
@@ -29,10 +46,13 @@ export default function Home() {
 
           {/* Галерея */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-            <img src="/illustrations/work1.jpg" className="rounded-lg shadow-md transform transition duration-300 hover:scale-105" />
-            <img src="/illustrations/work2.jpg" className="rounded-lg shadow-md transform transition duration-300 hover:scale-105" />
-            <img src="/illustrations/work3.jpg" className="rounded-lg shadow-md transform transition duration-300 hover:scale-105" />
+        {projects.map((project) => (
+          <div key={project.id} className="p-4 border rounded-lg shadow-md">
+            <img src={project.imageUrl} alt={project.title} className="rounded-lg" />
+            <p className="text-center mt-2 font-semibold">{project.title}</p>
           </div>
+        ))}
+      </div>
         </div>
       </div>
     </Layout>
